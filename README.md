@@ -5,6 +5,6 @@ Um pequeno jogo de turnos que estou desenvolvendo enquanto estudo um pouco de PO
 * _Pretendo adicionar magias._
 * _Por enquanto não pretendo fazer interface gráfica_
 
-</br>
+
 
 Basta rodar o arena.py, com os outros arquivos python dentro do mesmo diretório.
