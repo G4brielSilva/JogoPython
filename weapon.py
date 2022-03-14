@@ -1,6 +1,7 @@
 
 from random import randint
 
+# Super
 class Weapons:
     def __init__(self,):
         self.weapon="Weapon"
@@ -17,16 +18,12 @@ class Sword(Weapons):
         self.damage=4
         self.habilitColdown=1
     
+    # Ignore enemy's shield and got damage
     def BreakShield(self, player, enemy):
         enemy.TakeShieldDamage(enemy.shield)
         damage= player.Attack(enemy)
-        
-        if(damage!=0):
-            print(f'You break the shield of the oponent causing {damage} damage\n')
-        else:
-            print('You breake the shield of the oponent but no cause damage\n')
-        
         self.habilitColdown=3
+        return damage
 
 class Spear(Weapons):
     def __init__(self):
@@ -34,11 +31,12 @@ class Spear(Weapons):
         self.damage=3
         self.habilitColdown=1
     
+    # Got extra 3 damage
     def Weakness(self, enemy, player):
         enemy.TakeDamage(enemy.TakeShieldDamage(self.damage))
         damage=player.Attack(enemy)
-        print(f'The Weakness cause {damage} + {self.damage} damage\n')
-        self;habilitColdown=2
+        self.habilitColdown=2
+        return damage
 
 
 class Bow(Weapons):
@@ -47,17 +45,17 @@ class Bow(Weapons):
         self.damage=2
         self.habilitColdown=1
     
+    # Causes double damage
     def CriticalHit(self, player, enemy):
         damage=player.Attack(enemy)
 
         if(damage==0):
             damage=self.damage
         enemy.TakeDamage(damage)
-        print(f'You got a Critical Hit causing {2*damage} damage\n')
-
         self.habilitColdown=3
+        return damage
 
-
+# choice a randon Weapon
 def randWeapon():
     rand=randint(0,2)
     if(rand==0):
