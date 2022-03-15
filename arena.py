@@ -97,7 +97,7 @@ while True:
             print("Enemys Missed Attack!\n")
     elif(enemysAction==1):
         enemy.Defense()
-        print(f"\nEnemy enter in defense position and gain {enemy.shield} of shield")
+        print(f"\nEnemy enter in defense position and gain {enemy.shield} of shield\n")
     elif(enemysAction==2):
         if(enemy.Weapon.habilitColdown!=0):
             shield=player.shield
