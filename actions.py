@@ -27,10 +27,10 @@ def ChoiceAction(player,enemy):
 
     print(f"Enemy: L:{enemy.life} S:{enemy.shield}")
     if(enemy.Weapon.weaponType=='Magical'):
-        print(f"M: {enemy.mana}\n")
+        print(f"M: {enemy.mana}")
 
 
-    print("Choice a Action:")
+    print("\nChoice a Action:")
     print("[A] Attack\n[D] Defense")
 
     if(player.Weapon.weaponType=='Physical'):
@@ -43,6 +43,7 @@ def ChoiceAction(player,enemy):
             print(f"[C] CriticalHit CD:{player.Weapon.habilitColdown}\n")
         choice=input()[0].upper()
     elif(player.Weapon.weaponType=='Magical'):
+        print(f"[M] Meditate")
         # Magics
         print(f"""
 [F] Fireball CD:{player.magics['F'].magicColdown}\tMana Cost: {player.magics['F'].manaCost}
@@ -51,6 +52,24 @@ def ChoiceAction(player,enemy):
 """)
         choice=input()[0].upper()
     return choice
+
+# Show Status
+
+def ShowStatus(Character):
+    print(f"""
+Life: {Character.life}    
+Shield: {Character.shield}
+Weapon: {Character.Weapon.weapon}
+    """)
+    if(Character.Weapon.weaponType=='Magical'):
+        print(f"""
+Mana: {Character.mana}
+
+[F] CD:{Character.magics['F'].magicColdown}
+[I] CD:{Character.magics['I'].magicColdown}
+[L] CD:{Character.magics['L'].magicColdown}\n      
+        """)
+
 
 # Making Player Action
 def MakingPlayerAction(choice, player, enemy):
@@ -103,7 +122,14 @@ def MakingPlayerAction(choice, player, enemy):
                     print("and missed Attack!\n")
         
         elif player.Weapon.weaponType=='Magical':
-            if(player.magics[choice].magicColdown==0):
+            if(choice=="M"):
+                ManaGain=player.Meditate()
+                if(ManaGain!=0):
+                    print(f"\nYou Meditate and recovered {ManaGain} points of mana")
+                else:
+                    print(f"\nYou Meditate, but you already have maximum of mana!")
+
+            elif(player.magics[choice].magicColdown==0):
                 if(player.mana>= player.magics[choice].manaCost):
                     damage=player.magics[choice].Conjure(player, enemy)
                     manaCost=player.magics[choice].manaCost
@@ -132,7 +158,7 @@ def MakingEnemyAction(player, enemy):
 
     elif enemy.Weapon.weaponType=='Magical':
         magics=['F','I','L']
-        enemysAction=choice(['Attack','Defense',magics])
+        enemysAction=choice(['Attack','Defense','Magics'])
 
     if(enemysAction=='Attack'):
         shield=player.shield
@@ -144,8 +170,8 @@ def MakingEnemyAction(player, enemy):
         else:
             print("Enemys Missed Attack!\n")
     elif(enemysAction=='Defense'):
-        enemy.Defense()
-        print(f"\nEnemy enter in defense position and gain {enemy.shield} of shield\n")
+        shield = enemy.Defense()
+        print(f"\nEnemy enter in defense position and gain {shield} of shield\n")
     elif(enemysAction=='Weapon Hability'):
         if(enemy.Weapon.habilitColdown!=0):
             shield=player.shield
@@ -171,13 +197,14 @@ def MakingEnemyAction(player, enemy):
                 damage=enemy.Weapon.CriticalHit(enemy, player)
                 print(f"The enemy got a Critical Hit causing {2*damage} damage\n")
 
-    elif(enemysAction==magics):
+    elif(enemysAction=='Magics'):
         enemysAction=choice(magics)
 
         ct=0
         while (enemy.magics[enemysAction].magicColdown == 0 or enemy.mana>enemy.magics[enemysAction].manaCost) and ct<9:
-            enemysAction=choice(magics.filter(enemysAction, magics))
+            enemysAction=choice(magics)
             ct+=1
+
         if ct<9:
             damage=enemy.magics[enemysAction].Conjure(enemy, player)
             mana=enemy.mana>enemy.magics[enemysAction].manaCost
@@ -207,6 +234,29 @@ def ColdownPassing(Player,Enemy):
     if(Enemy.Weapon.weaponType=='Physical'):
         Enemy.Weapon.ColdownPass()
     else:
-        for magic in Enemy.magics:
-            print(magic)
+        for magic in Enemy.magics.values():
             magic.ColdownPass()
+
+# Creating Player and Enemy
+
+def CreatingCharacters(ret):
+    playerCharClass= str(input('Select a Character Class:\n[M]-Mage\n[W]-Warior\n'))[0].upper()
+
+    if playerCharClass=='M':
+        player= Mago()
+    elif playerCharClass=='W':
+        player = Guerreiro()
+
+    enemyCharClass = choice(['M','W'])
+
+    if enemyCharClass=='M':
+        enemy= Mago()
+    elif enemyCharClass=='W':
+        enemy = Guerreiro()
+
+    if ret =='both':
+        return player,enemy
+    elif ret == 'enemy':
+        return enemy
+    elif ret =='player':
+        return player

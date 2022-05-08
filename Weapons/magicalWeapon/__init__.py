@@ -5,6 +5,7 @@ from Weapons import Weapons
 
 
 class Staff(Weapons):
+
     def __init__(self):
         self.weapon="Staff"
         self.weaponType="Magical"

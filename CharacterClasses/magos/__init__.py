@@ -20,11 +20,19 @@ class Mago(Personagem):
         self.mana=self.manaMax
         self.magics = {"F": fireball,"I": icefragments,"L": lightningbolt}
 
-    # The mage Defensive position has mana which argument
+    # The mage Defensive position has Max of mana which argument
     def Defense(self):
-        self.shield+=randint(1,int(self.manaMax/3))
+        shield = randint(1,int(self.manaMax/3))
+        self.shield+= shield
+        return shield
     
-    def Medidate(self):
-        mana=randint(1,int(self.manaMax/3))
+    # The mage take a turn to medidate and gain mana points
+    def Meditate(self):
+        mana=randint(1,int(self.manaMax/2))
         self.mana+=mana
+
+        if(self.mana>self.manaMax):
+            self.mana=self.manaMax
+            return self.manaMax-self.mana
+        
         return mana

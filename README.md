@@ -9,7 +9,7 @@ Basta rodar o arena.py, os arquivos estão sendo separados em pacotes.
 
 Este projeto está sendo construido em uma venv com python versão 3.10.
 
-## Últimas Atualizações v 2.0.0:
+## Últimas Atualizações v 1.0.3:
 
     1. Modulei as SuperClasses
 

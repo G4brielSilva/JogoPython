@@ -1,4 +1,4 @@
-#super
+# Super
 class Magic:
     def __init__(self):
         self.magicColdown=3
