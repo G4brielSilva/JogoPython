@@ -23,7 +23,7 @@ class Mago(Personagem):
     # The mage Defensive position has Max of mana which argument
     def Defense(self):
         shield = randint(1,int(self.manaMax/3))
-        self.shield+= shield
+        self.shield= shield
         return shield
     
     # The mage take a turn to medidate and gain mana points

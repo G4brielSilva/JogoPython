@@ -1,48 +1,44 @@
-from actions import *
-from debug import endgame
+from Actions import enemysActions
+from Actions import playersActions
+from Actions import gameActions
 
+from debug import endgame
+from time import sleep
 
 cont=True
-
-def Continue(player, enemy):
-    if((str(input('\ndo you Want to continue?\n[Y] or [N]\n'))[0].upper())=='N'):
-        print('\nObrigado por Jogar!\n')
-        sleep(1)
-        return False
-    else:
-        print()
-        return True
-
 
 # Loop of the game
 while (cont):
 
     # Creating Player and Enemy
-    player, enemy = CreatingCharacters('both')
-
+    player, enemy = gameActions.CreatingCharacters('both')
+    #endgame(player, enemy)
     # Loop of battle
     while True:
         
-        #endgame(player, enemy)
+        #playersActionsMakingPlayerAction(playersActions.PlayerChoiceAction(player, enemy),player, enemy)
+        gameActions.ShowStatus(player)
 
-        #MakingPlayerAction(ChoiceAction(player, enemy),player, enemy)
-        ShowStatus(player)
-        MakingEnemyAction(enemy, player)
-        ShowStatus(player)
-        ShowStatus(enemy)
-        if(FinishHim(player,enemy)):
+        enemysActions.MakingEnemyAction(enemy, player)
+
+        gameActions.ShowStatus(player)
+        gameActions.ShowStatus(enemy)
+        
+        if(gameActions.FinishHim(player,enemy)):
             break
         sleep(4)
         
-        MakingEnemyAction(player, enemy)
-        ShowStatus(enemy)
+        enemysActions.MakingEnemyAction(player, enemy)
 
-        if(FinishHim(player,enemy)):
+        gameActions.ShowStatus(enemy)
+
+        if(gameActions.FinishHim(player,enemy)):
             break
 
-        ColdownPassing(player, enemy)
+        gameActions.ColdownPassing(player, enemy)
 
-    cont = Continue(player,enemy)
+    cont = gameActions.Continue(player,enemy)
+
     del enemy,player
     
 

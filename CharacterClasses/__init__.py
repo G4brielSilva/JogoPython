@@ -43,6 +43,8 @@ class Personagem:
     # Take Damage
     def TakeDamage(self, damage):
         self.life-=damage
+        if(self.life<=0):
+            self.life==0
 
     # Take Damage on shield
     def TakeShieldDamage(self, damage):
