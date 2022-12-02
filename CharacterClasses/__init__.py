@@ -19,13 +19,17 @@ from random import randint
 
 
 class Personagem:
+    shield=0
+    characterClass="class"
+    life=0
+    attack=0
+    Weapon="weapon"
+    shield=0
+    
     #Creating a Character
     def __init__(self):
-        self.characterClass="class"
-        self.life=0
-        self.attack=0
-        self.Weapon="Nothing"
-        self.shield=0
+        pass
+        
         
     # Atacking the enemy
     def Attack(self, target):

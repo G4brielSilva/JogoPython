@@ -9,19 +9,13 @@ Basta rodar o arena.py, os arquivos estão sendo separados em pacotes.
 
 Este projeto está sendo construido em uma venv com python versão 3.10.
 
-## Últimas Atualizações v 1.0.3:
+## Últimas Atualizações v 2.0.0:
 
-    1. Modulei as SuperClasses
+    1. Adicionando Classes abstratas e implementando atributos estáticos comuns as classes
 
-    2. Separei os tipos de armas adicionando atributos para identificar cada tipo
+    2. Refatoring bruto em todo código, melhorando a qualidade e diminuindo bruscamente o número de linhas e repetições
 
-    3. Criei seleção de classes, e usabilidades
-
-    4. Adicionei armas mágicas com passivas ao inveś de ativas
-
-    5. Coloquei a definição de status interna às classes que definem os personagens
-
-    6. Criei a classe de guerreiro
+    3. Centralizando ações de inimigo e player, de modo a ser chamado de forma genérica
 
 ## Possíveis Futuras Adições:
 
@@ -38,7 +32,8 @@ Este projeto está sendo construido em uma venv com python versão 3.10.
 _Pode ser que hajam alguns bugs._
 _Estou desenvolvendo devagar, e documentando mais devagar ainda._
 
-Por enquanto ainda não tem dependências no projeto, mas caso sejam adicionadas futuramente basta utilizar o comando:
+
+Baixar dependências
 
 ```bash 
 pip install -r requirements.txt

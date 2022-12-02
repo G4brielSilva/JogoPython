@@ -4,27 +4,28 @@ from Magics import Magic
 
 # A lot of damage
 class Fireball(Magic):
+    magic = 'Fireball'
+    magicColdown=2
+    manaCost=6
+
     def __init__(self):
-        self.magic = 'Fireball'
-        self.magicColdown=2
-        self.manaCost=6
-    
+        pass    
+        
     def Conjure(self, Wizard, Target):
-        damage=randint(1, int(Wizard.manaMax/3))+ randint(1, Wizard.Weapon.power)
+        damage=randint(1, int(Wizard.manaMax/3))+  randint(1, Wizard.Weapon.power)
         Target.TakeDamage(damage)
         self.magicColdown=3
-
-        if(Wizard.Weapon.weapon=="Orb"):
-            self.magicColdown-=1
         
         return damage
 
 # The less fragments, the more damage
 class IceFragments(Magic):
+    magic = 'Ice Fragments'
+    magicColdown=1
+    manaCost=8
+    
     def __init__(self):
-        self.magic = 'Ice Fragments'
-        self.magicColdown=1
-        self.manaCost=8
+        pass         
 
     def Conjure(self, Wizard, Target):
         fragments=choice([2,4,6])
@@ -44,6 +45,7 @@ class IceFragments(Magic):
             damage+=eachDamage
 
         self.magicColdown=2
+
         return damage
 
 
@@ -55,15 +57,22 @@ class LightningBolt(Magic):
         self.manaCost=5
 
     def Conjure(self, Wizard, Target):
-        chance=choice(["Fail","Hit"])
+        chance=choice(["F","H"])
         damage=0
 
         self.magicColdown=3
 
-        if chance=="Hit":
+        if chance=="H":
             damage=5+Wizard.Weapon.power
             Target.ResetShield()
             Target.TakeDamage(damage)
 
         return damage
-            
+
+class Magics:
+
+    def __init__(self):
+        self.fireball = Fireball()
+        self.icefragments = IceFragments()
+        self.lightningbolt = LightningBolt()
+        self.magics = [self.fireball,self.icefragments,self.lightningbolt]

@@ -5,35 +5,38 @@ from Weapons import Weapons
 
 
 class Staff(Weapons):
+    weapon = "Staff"
+    weaponType = "Magical"
+    damage = 1
+    __magicPowerBonus = randint(1,2)
+    power= 4 + __magicPowerBonus
+    passive={'Passive': "Magic Penetration",'Description': f"The staff have a Bonus of Magic Power {power-__magicPowerBonus} + {__magicPowerBonus}"}
 
     def __init__(self):
-        self.weapon="Staff"
-        self.weaponType="Magical"
-        self.damage=1
-
-        self.__magicPowerBonus=randint(1,2)
-        self.power=4+self.__magicPowerBonus
-
-        self.passive={'Passive': "Magic Penetration",'Description': f"The staff have a Bonus of Magic Power {self.power-self.__magicPowerBonus} + {self.__magicPowerBonus}"}
-
+        pass
 class Orb(Weapons):
-    def __init__(self):
-        self.weapon="Orb"
-        self.weaponType="Magical"
-        self.damage=0
-        self.bonusManaCost = randint(1, 3)
-        self.power=3
+    weapon="Orb"
+    weaponType="Magical"
+    damage=0
+    bonusManaCost = randint(1, 3)
+    power=3
 
-        self.passive={'Passive': "Spiritual Blessing",'Description': f"Reduce the mana cost in {self.bonusManaCost}"}
+    passive={'Passive': "Spiritual Blessing",'Description': f"Reduce the mana cost in {bonusManaCost}"}
+
+    def __init__(self):
+        pass
 
 class Grimoire(Weapons):
-    def __init__(self):
-        self.weapon="Grimoire"
-        self.weaponType="Magical"
-        self.damage=1
-        self.power=2
 
-        self.passive={'Passive': "Arcane Wisdom",'Description': f"Reduce the magic coldown in 1 turn"}
+    weapon="Grimoire"
+    weaponType="Magical"
+    damage=1
+    power=2
+
+    passive={'Passive': "Arcane Wisdom",'Description': f"Reduce the magic coldown in 1 turn"}
+
+    def __init__(self):
+        pass    
 
 # choice a randon Weapon
 def randMagicalWeapon():

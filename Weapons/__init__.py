@@ -1,11 +1,14 @@
+from abc import ABC, abstractclassmethod
 # Super
-class Weapons:
-    def __init__(self):
-        self.weapon="Weapon"
-        self.weaponType="Weapon"
-        self.damage=0
-        self.habilitColdown=0
+class Weapons(ABC):
+    weapon="Weapon"
+    weaponType="Weapon"
+    damage=0
+
+    @abstractclassmethod
+    def __init__(self):    
+        self.habilityColdown=0
     
     def ColdownPass(self):
-        if(self.habilitColdown>0):
-            self.habilitColdown-=1
+        if(self.habilityColdown>0):
+            self.habilityColdown-=1
